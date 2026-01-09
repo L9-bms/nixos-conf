@@ -13,8 +13,8 @@
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
 
-    # You can also split up your configuration and import pieces of it here:
-    # ./users.nix
+    ../modules/network.nix
+    ../modules/monitoring.nix
 
     ./hardware-configuration.nix
   ];
@@ -62,8 +62,18 @@
     device = "/dev/vda";
   };
 
+  programs.nix-ld.enable = true;
+
   networking.hostName = "aperouge";
   networking.networkmanager.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      80
+      53
+    ];
+    allowedUDPPorts = [ 53 ];
+  };
 
   services.tailscale.enable = true;
 
@@ -90,6 +100,9 @@
   environment.systemPackages = with pkgs; [
     git
     wget
+    age
+    sops
+    openssl
   ];
 
   services.openssh = {
@@ -101,6 +114,12 @@
       # Remove if you want to SSH using passwords
       PasswordAuthentication = false;
     };
+  };
+
+  sops = {
+    defaultSopsFile = ../secrets/caddy-ca.yaml;
+
+    age.keyFile = "/var/lib/sops-nix/key.txt";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

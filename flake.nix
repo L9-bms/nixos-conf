@@ -4,12 +4,18 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      sops-nix,
       ...
     }@inputs:
     {
@@ -19,7 +25,10 @@
         aperouge = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           # > Our main nixos configuration file <
-          modules = [ ./homelab/configuration.nix ];
+          modules = [
+            ./homelab/configuration.nix
+            sops-nix.nixosModules.sops
+          ];
         };
       };
     };
