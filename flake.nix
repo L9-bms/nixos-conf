@@ -2,7 +2,6 @@
   description = "Your new nix config";
 
   inputs = {
-    # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
     sops-nix = {
@@ -11,6 +10,11 @@
     };
 
     prism-tower.url = "github:L9-bms/prism-tower";
+
+    microvm = {
+      url = "github:microvm-nix/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -18,18 +22,17 @@
       self,
       nixpkgs,
       sops-nix,
+      microvm,
       ...
     }@inputs:
     {
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         aperouge = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          # > Our main nixos configuration file <
           modules = [
             ./homelab/configuration.nix
             sops-nix.nixosModules.sops
+            microvm.nixosModules.host
           ];
         };
       };

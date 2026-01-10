@@ -3,12 +3,14 @@
   lib,
   config,
   pkgs,
+  microvm,
   ...
 }:
 {
   imports = [
     ../modules/network.nix
     ../modules/monitoring.nix
+    ../modules/vm.nix
 
     ./hardware-configuration.nix
   ];
@@ -53,7 +55,6 @@
   programs.nix-ld.enable = true;
 
   networking.hostName = "aperouge";
-  networking.networkmanager.enable = true;
 
   services.tailscale.enable = true;
 
@@ -97,6 +98,57 @@
     defaultSopsFile = ../secrets/caddy-ca.yaml;
 
     age.keyFile = "/var/lib/sops-nix/key.txt";
+  };
+
+  networking.useNetworkd = true;
+
+  systemd.network.networks =
+    builtins.listToAttrs (
+      map (index: {
+        name = "30-vm${toString index}";
+        value = {
+          matchConfig.Name = "vm${toString index}";
+          # Host's addresses
+          address = [
+            "10.0.0.0/32"
+            "fec0::/128"
+          ];
+          # Setup routes to the VM
+          routes = [
+            {
+              Destination = "10.0.0.${toString index}/32";
+            }
+            {
+              Destination = "fec0::${lib.toHexString index}/128";
+            }
+          ];
+          # Enable routing
+          networkConfig = {
+            IPv4Forwarding = true;
+            IPv6Forwarding = true;
+          };
+        };
+      }) (lib.genList (i: i + 1) 8)
+    )
+    // {
+      "10-wan" = {
+        matchConfig.Name = "enp1s0";
+        networkConfig = {
+          # start a DHCP Client for IPv4 Addressing/Routing
+          DHCP = "ipv4";
+          # accept Router Advertisements for Stateless IPv6 Autoconfiguraton (SLAAC)
+          IPv6AcceptRA = true;
+        };
+        # make routing on this interface a dependency for network-online.target
+        linkConfig.RequiredForOnline = "routable";
+      };
+    };
+
+  networking.nat = {
+    enable = true;
+    internalIPs = [ "10.0.0.0/24" ];
+    # Change this to the interface with upstream Internet access
+    externalInterface = "enp1s0";
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
