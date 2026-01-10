@@ -9,6 +9,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    prism-tower.url = "github:L9-bms/prism-tower";
   };
 
   outputs =
