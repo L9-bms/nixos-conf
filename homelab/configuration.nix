@@ -1,5 +1,3 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
   lib,
@@ -9,10 +7,6 @@
 }:
 {
   imports = [
-    # If you want to use modules from other flakes (such as nixos-hardware):
-    # inputs.hardware.nixosModules.common-cpu-amd
-    # inputs.hardware.nixosModules.common-ssd
-
     ../modules/network.nix
     ../modules/monitoring.nix
 
@@ -20,17 +14,6 @@
   ];
 
   nixpkgs = {
-    overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
     config = {
       allowUnfree = true;
     };
@@ -42,19 +25,24 @@
     in
     {
       settings = {
-        # Enable flakes and new 'nix' command
         experimental-features = "nix-command flakes";
-        # Opinionated: disable global registry
         flake-registry = "";
-        # Workaround for https://github.com/NixOS/nix/issues/9574
-        nix-path = config.nix.nixPath;
       };
-      # Opinionated: disable channels
       channel.enable = false;
 
-      # Opinionated: make flake registry and nix path match flake inputs
       registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
       nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+
+      optimise = {
+        automatic = true;
+        dates = [ "03:45" ];
+      };
+
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+      };
     };
 
   boot.loader.grub = {
@@ -66,14 +54,6 @@
 
   networking.hostName = "aperouge";
   networking.networkmanager.enable = true;
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      80
-      53
-    ];
-    allowedUDPPorts = [ 53 ];
-  };
 
   services.tailscale.enable = true;
 
@@ -108,10 +88,7 @@
   services.openssh = {
     enable = true;
     settings = {
-      # Opinionated: forbid root login through SSH.
       PermitRootLogin = "no";
-      # Opinionated: use keys only.
-      # Remove if you want to SSH using passwords
       PasswordAuthentication = false;
     };
   };

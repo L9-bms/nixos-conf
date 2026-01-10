@@ -5,7 +5,6 @@
   modulesPath,
   ...
 }:
-
 {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
@@ -37,6 +36,8 @@
   };
 
   swapDevices = [ ];
+
+  services.fstrim.enable = true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
