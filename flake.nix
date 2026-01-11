@@ -30,7 +30,7 @@
         aperouge = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            ./homelab/configuration.nix
+            ./hosts/aperouge
             sops-nix.nixosModules.sops
             microvm.nixosModules.host
           ];
