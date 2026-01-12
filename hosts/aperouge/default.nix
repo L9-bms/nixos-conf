@@ -84,10 +84,15 @@
     directories = [
       "/var/lib/tailscale"
       "/var/lib/nixos"
-      "/var/lib/technitium-dns-server"
+      # "/var/lib/technitium-dns-server"
       "/var/lib/grafana"
       "/var/lib/prometheus2"
     ];
+  };
+
+  fileSystems."/var/lib/technitium-dns-server" = {
+    device = "/persist/var/lib/technitium-dns-server";
+    options = [ "bind" ];
   };
 
   sops = {

@@ -17,6 +17,15 @@ in
   config = lib.mkIf cfg.enable {
     services.technitium-dns-server.enable = true;
 
+    # https://github.com/NixOS/nixpkgs/issues/416320
+    systemd.services.technitium-dns-server.serviceConfig = {
+      WorkingDirectory = lib.mkForce null;
+      BindPaths = lib.mkForce null;
+      DynamicUser = lib.mkForce false;
+      User = "root"; # this is probably bad
+      Group = "root";
+    };
+
     systemd.tmpfiles.rules = [
       "d /persist/caddy 0750 caddy caddy -"
     ];
