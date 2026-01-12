@@ -15,6 +15,11 @@
       url = "github:microvm-nix/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -23,6 +28,7 @@
       nixpkgs,
       sops-nix,
       microvm,
+      disko,
       ...
     }@inputs:
     {
@@ -33,6 +39,7 @@
             ./hosts/aperouge
             sops-nix.nixosModules.sops
             microvm.nixosModules.host
+            disko.nixosModules.disko
           ];
         };
       };

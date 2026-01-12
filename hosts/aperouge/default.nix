@@ -4,16 +4,33 @@
   imports = [
     ../../modules
     ./hardware-configuration.nix
+    ./disk-config.nix
   ];
 
   profiles.server.enable = true;
   profiles.homelab.enable = true;
 
   networking.hostName = "aperouge";
-  boot.loader.grub = {
+  networking.hostId = "7f580963";
+  
+  boot.loader.systemd-boot.enable = true;
+
+  boot.initrd.systemd = {
     enable = true;
-    device = "/dev/vda";
+    services.initrd-rollback-root = {
+      after = [ "zfs-import-rpool.service" ];
+      wantedBy = [ "initrd.target" ];
+      before = [
+        "sysroot.mount"
+      ];
+      path = [ pkgs.zfs ];
+      description = "Rollback root fs";
+      unitConfig.DefaultDependencies = "no";
+      serviceConfig.Type = "oneshot";
+      script = "zfs rollback -r rpool/nixos/root@blank";
+    };
   };
+  # https://notthebe.ee/blog/nixos-ephemeral-zfs-root/
 
   # for vscode remote server...
   programs.nix-ld.enable = true;
@@ -28,6 +45,7 @@
     };
     linkConfig.RequiredForOnline = "routable";
   };
+  
 
   environment.systemPackages = with pkgs; [
     git
@@ -37,9 +55,16 @@
     openssl
   ];
 
+  services.openssh.hostKeys = [
+    {
+      path = "/persist/ssh/ssh_host_ed25519_key";
+      type = "ed25519";
+    }
+  ];
+
   sops = {
     defaultSopsFile = ../../secrets/caddy-ca.yaml;
-    age.keyFile = "/var/lib/sops-nix/key.txt";
+    age.keyFile = "/persist/sops-nix/key.txt";
   };
 
   system.stateVersion = "25.11";

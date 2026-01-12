@@ -34,6 +34,7 @@ in
       user = "caddy";
       group = "caddy";
       globalConfig = ''
+        storage file_system /persist/caddy
         pki {
           ca 7sref_ca {
             name 7sref_ca
