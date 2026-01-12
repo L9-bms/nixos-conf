@@ -77,11 +77,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1768140547,
-        "narHash": "sha256-yXtWxRna81NLrBlxQXuOJsM3w/H7iYVuwC9pJPj2Fx8=",
+        "lastModified": 1768189100,
+        "narHash": "sha256-kl1iufjP1zzKDUrIb8qI6Majq2Vh653/QEWNfobklo4=",
         "owner": "L9-bms",
         "repo": "prism-tower",
-        "rev": "e9b7298773a0881e94ce12b1f91d870d917a583a",
+        "rev": "98263d8766fdbd57e1b3b6cf9b0c1ad5fc808a9e",
         "type": "github"
       },
       "original": {
