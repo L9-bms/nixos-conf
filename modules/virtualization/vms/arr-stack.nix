@@ -16,26 +16,26 @@
 
   microvm.volumes = [
     {
-      image = "/dev/zvol/vms/arr-stack";
+      image = "/dev/zvol/rpool/vms/arr-stack";
       mountPoint = "/";
-      size = "10240";
+      size = 10240;
     }
   ];
 
-  microvm.shares = [
-    {
-      source = "/home/callum/changethislater/data";
-      mountPoint = "/data";
-      tag = "data";
-      proto = "virtiofs";
-    }
-    {
-      source = "/home/callum/changethislater/media";
-      mountPoint = "/media";
-      tag = "media";
-      proto = "virtiofs";
-    }
-  ];
+  # microvm.shares = [
+  #   {
+  #     source = "/home/callum/changethislater/data";
+  #     mountPoint = "/data";
+  #     tag = "data";
+  #     proto = "virtiofs";
+  #   }
+  #   {
+  #     source = "/home/callum/changethislater/media";
+  #     mountPoint = "/media";
+  #     tag = "media";
+  #     proto = "virtiofs";
+  #   }
+  # ];
 
   # Create required directories for containers
   systemd.tmpfiles.rules = [
