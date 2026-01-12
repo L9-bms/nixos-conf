@@ -39,7 +39,6 @@ in
     time.timeZone = "Australia/Sydney";
     console.font = "Lat2-Terminus16";
 
-    services.tailscale.enable = true;
     services.openssh.enable = true;
     services.openssh.settings = {
       PermitRootLogin = "no";

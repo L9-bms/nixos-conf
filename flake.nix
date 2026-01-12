@@ -20,6 +20,8 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs =
@@ -29,6 +31,7 @@
       sops-nix,
       microvm,
       disko,
+      impermanence,
       ...
     }@inputs:
     {
@@ -40,6 +43,7 @@
             sops-nix.nixosModules.sops
             microvm.nixosModules.host
             disko.nixosModules.disko
+            impermanence.nixosModules.impermanence
           ];
         };
       };

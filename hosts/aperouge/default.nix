@@ -45,7 +45,6 @@
     };
     linkConfig.RequiredForOnline = "routable";
   };
-  
 
   environment.systemPackages = with pkgs; [
     git
@@ -57,13 +56,27 @@
 
   services.openssh.hostKeys = [
     {
-      path = "/persist/ssh/ssh_host_ed25519_key";
+      path = "/etc/ssh/ssh_host_ed25519_key";
       type = "ed25519";
+    }
+    {
+      path = "/etc/ssh/ssh_host_rsa_key";
+      type = "rsa";
+      bits = "4096";
     }
   ];
 
+  environment.persistence."/persist".files = [
+    "/etc/ssh/ssh_host_ed25519_key"
+    "/etc/ssh/ssh_host_ed25519_key.pub"
+    "/etc/ssh/ssh_host_rsa_key"
+    "/etc/ssh/ssh_host_rsa_key.pub"
+    "/etc/machine-id"
+    "/var/lib/tailscale"
+  ];
+
   sops = {
-    defaultSopsFile = ../../secrets/caddy-ca.yaml;
+    defaultSopsFile = ../../secrets/secrets.yaml;
     age.keyFile = "/persist/sops-nix/key.txt";
   };
 

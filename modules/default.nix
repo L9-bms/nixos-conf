@@ -27,6 +27,7 @@ in
     (lib.mkIf (cfg.server.enable or false) {
       modules.common.enable = true;
       modules.users.enable = true;
+      modules.tailscale.enable = true;
     })
 
     (lib.mkIf (cfg.homelab.enable or false) {

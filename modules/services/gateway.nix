@@ -17,6 +17,10 @@ in
   config = lib.mkIf cfg.enable {
     services.technitium-dns-server.enable = true;
 
+    systemd.tmpfiles.rules = [
+      "d /persist/caddy 0750 caddy caddy -"
+    ];
+
     sops.secrets."caddy/ca.pem" = {
       owner = "caddy";
       group = "caddy";
@@ -39,8 +43,8 @@ in
           ca 7sref_ca {
             name 7sref_ca
             root {
-              cert /run/secrets/caddy/ca.pem
-              key /run/secrets/caddy/ca.key
+              cert ${config.sops."caddy/ca.pem".path}
+              key ${config.sops."caddy/ca.key".path}
             }
           }
         }
