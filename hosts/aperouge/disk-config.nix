@@ -1,5 +1,5 @@
 let
-  diskMain = "ata-QEMU_HARDDISK_QM00003";
+  diskMain = "virtio-67";
 in
 {
   disko.devices = {
