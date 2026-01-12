@@ -36,5 +36,8 @@ in
         ) vmConfigs
       );
     };
+
+    # to access zvols
+    users.users.microvm.extraGroups = [ "disk" ];
   };
 }

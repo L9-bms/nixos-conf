@@ -19,11 +19,6 @@ in
       type = lib.types.int;
       description = "Memory in MB";
     };
-
-    diskSize = lib.mkOption {
-      type = lib.types.int;
-      description = "Disk size in MB";
-    };
   };
 
   config = {
@@ -44,14 +39,6 @@ in
           mountPoint = "/nix/.ro-store";
           tag = "ro-store";
           proto = "virtiofs";
-        }
-      ];
-
-      volumes = [
-        {
-          image = "/microvm/${config.networking.hostName}";
-          mountPoint = "/";
-          size = cfg.diskSize;
         }
       ];
 

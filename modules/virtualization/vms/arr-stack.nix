@@ -12,8 +12,15 @@
     index = 1;
     mac = "00:00:00:00:00:01";
     mem = 2000;
-    diskSize = 5120;
   };
+
+  microvm.volumes = [
+    {
+      image = "/dev/zvol/vms/arr-stack";
+      mountPoint = "/";
+      size = "10240";
+    }
+  ];
 
   microvm.shares = [
     {
