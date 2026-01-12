@@ -43,8 +43,8 @@ in
           ca 7sref_ca {
             name 7sref_ca
             root {
-              cert ${config.sops."caddy/ca.pem".path}
-              key ${config.sops."caddy/ca.key".path}
+              cert ${config.sops.secrets."caddy/ca.pem".path}
+              key ${config.sops.secrets."caddy/ca.key".path}
             }
           }
         }

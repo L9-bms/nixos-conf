@@ -7,6 +7,7 @@ in
   imports = [
     ./common.nix
     ./users.nix
+    ./tailscale.nix
     ./services/definitions.nix
     ./services/gateway.nix
     ./services/monitoring.nix

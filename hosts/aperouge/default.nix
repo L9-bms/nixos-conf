@@ -15,6 +15,10 @@
   
   boot.loader.systemd-boot.enable = true;
 
+  fileSystems."/persist".neededForBoot = true;
+
+  console.earlySetup = true;
+  systemd.services.systemd-vconsole-setup.unitConfig.After = "local-fs.target";
   boot.initrd.systemd = {
     enable = true;
     services.initrd-rollback-root = {
@@ -66,14 +70,18 @@
     }
   ];
 
-  environment.persistence."/persist".files = [
-    "/etc/ssh/ssh_host_ed25519_key"
-    "/etc/ssh/ssh_host_ed25519_key.pub"
-    "/etc/ssh/ssh_host_rsa_key"
-    "/etc/ssh/ssh_host_rsa_key.pub"
-    "/etc/machine-id"
-    "/var/lib/tailscale"
-  ];
+  environment.persistence."/persist" = {
+    files = [
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+      "/etc/machine-id"
+    ];
+    directories = [
+      "/var/lib/tailscale"
+    ];
+  };
 
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
