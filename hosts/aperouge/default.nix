@@ -71,6 +71,8 @@
   ];
 
   environment.persistence."/persist" = {
+    enable = true;
+    hideMounts = true;
     files = [
       "/etc/ssh/ssh_host_ed25519_key"
       "/etc/ssh/ssh_host_ed25519_key.pub"
@@ -82,6 +84,9 @@
     directories = [
       "/var/lib/tailscale"
       "/var/lib/nixos"
+      "/var/lib/technitium-dns-server"
+      "/var/lib/grafana"
+      "/var/lib/prometheus2"
     ];
   };
 
