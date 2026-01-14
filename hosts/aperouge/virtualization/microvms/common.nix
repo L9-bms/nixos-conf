@@ -23,7 +23,9 @@ in
 
   config = {
     # TODO: add host ssh key
-    users.users.root.password = "password";
+    users.users.root.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA/QBkbelaWRpHNIFUqmj3KoFKW0iGdMYVviT+7iSFH/ callum@aperouge"
+    ];
 
     services.openssh = {
       enable = true;

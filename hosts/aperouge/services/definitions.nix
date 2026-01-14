@@ -78,13 +78,13 @@
       addr = "10.0.0.1:11090";
       category = "Media";
     }
-    {
-      name = "Jellyfin";
-      host = "jellyfin.7sref";
-      iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/jellyfin.png";
-      addr = "10.0.0.1:8096";
-      category = "Media";
-    }
+    # {
+    #   name = "Jellyfin";
+    #   host = "jellyfin.7sref";
+    #   iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/jellyfin.png";
+    #   addr = "10.0.0.1:8096";
+    #   category = "Media";
+    # }
     {
       name = "FlareSolverr";
       host = "flaresolverr.7sref";

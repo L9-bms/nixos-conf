@@ -10,7 +10,7 @@ let
   flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
 in
 {
-  options.modules.common.enable = lib.mkEnableOption "Common config for all servers";
+  options.modules.common.enable = lib.mkEnableOption "Common config for all bare metal machines";
 
   config = lib.mkIf cfg.enable {
     nixpkgs.config.allowUnfree = true;

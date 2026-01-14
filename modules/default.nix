@@ -8,11 +8,6 @@ in
     ./common.nix
     ./users.nix
     ./tailscale.nix
-    ./services/definitions.nix
-    ./services/gateway.nix
-    ./services/monitoring.nix
-    ./virtualization/vms.nix
-    ./virtualization/networking.nix
   ];
 
   options.profiles = lib.mkOption {
@@ -25,17 +20,10 @@ in
   };
 
   config = lib.mkMerge [
-    (lib.mkIf (cfg.server.enable or false) {
+    (lib.mkIf (cfg.base.enable or false) {
       modules.common.enable = true;
       modules.users.enable = true;
       modules.tailscale.enable = true;
-    })
-
-    (lib.mkIf (cfg.homelab.enable or false) {
-      modules.services.gateway.enable = true;
-      modules.services.monitoring.enable = true;
-      modules.virtualization.vms.enable = true;
-      modules.virtualization.networking.enable = true;
     })
   ];
 }

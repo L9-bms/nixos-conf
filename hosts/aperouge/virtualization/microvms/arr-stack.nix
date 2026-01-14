@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./common
+    ./common.nix
     ./docker-compose.nix
   ];
 
@@ -22,30 +22,26 @@
     }
   ];
 
-  # microvm.shares = [
-  #   {
-  #     source = "/home/callum/changethislater/data";
-  #     mountPoint = "/data";
-  #     tag = "data";
-  #     proto = "virtiofs";
-  #   }
-  #   {
-  #     source = "/home/callum/changethislater/media";
-  #     mountPoint = "/media";
-  #     tag = "media";
-  #     proto = "virtiofs";
-  #   }
-  # ];
+  microvm.shares = [
+    {
+      source = "/persist/data/arr-stack";
+      mountPoint = "/data";
+      tag = "data";
+      proto = "virtiofs";
+    }
+    {
+      source = "/mnt/media";
+      mountPoint = "/media";
+      tag = "media";
+      proto = "virtiofs";
+    }
+  ];
 
-  # Create required directories for containers
   systemd.tmpfiles.rules = [
-    "d /data/jellyfin 0755 root root -"
-    "d /data/jellyfin/cache 0755 root root -"
-    "d /data/jellyfin/config 0755 root root -"
+    "d /data/sonarr 0755 root root -"
+    "d /data/radarr 0755 root root -"
     "d /data/prowlarr 0755 root root -"
     "d /data/qbittorrent 0755 root root -"
-    "d /data/radarr 0755 root root -"
-    "d /data/sonarr 0755 root root -"
     "d /media/media 0755 root root -"
     "d /media/torrents 0755 root root -"
   ];

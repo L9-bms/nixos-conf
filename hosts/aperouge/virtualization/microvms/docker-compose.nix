@@ -40,7 +40,6 @@
     ];
     log-driver = "journald";
     extraOptions = [
-      "--ip=172.21.0.6"
       "--network-alias=flaresolverr"
       "--network=media_media"
     ];
@@ -55,32 +54,6 @@
     requires = [
       "podman-network-media_media.service"
     ];
-    partOf = [
-      "podman-compose-media-root.target"
-    ];
-    wantedBy = [
-      "podman-compose-media-root.target"
-    ];
-  };
-  virtualisation.oci-containers.containers."media-jellyfin" = {
-    image = "jellyfin/jellyfin";
-    environment = {
-      "JELLYFIN_PublishedServerUrl" = "https://jellyfin.7sref";
-    };
-    volumes = [
-      "/media/media:/media:rw"
-      "/data/jellyfin/cache:/cache:rw"
-      "/data/jellyfin/config:/config:rw"
-    ];
-    ports = [
-      "8096:8096/tcp"
-    ];
-    log-driver = "journald";
-  };
-  systemd.services."podman-media-jellyfin" = {
-    serviceConfig = {
-      Restart = lib.mkOverride 90 "always";
-    };
     partOf = [
       "podman-compose-media-root.target"
     ];
@@ -103,7 +76,6 @@
     ];
     log-driver = "journald";
     extraOptions = [
-      "--ip=172.21.0.5"
       "--network-alias=prowlarr"
       "--network=media_media"
     ];
@@ -143,7 +115,6 @@
     ];
     log-driver = "journald";
     extraOptions = [
-      "--ip=172.21.0.2"
       "--network-alias=qbittorrent"
       "--network=media_media"
     ];
@@ -181,7 +152,6 @@
     ];
     log-driver = "journald";
     extraOptions = [
-      "--ip=172.21.0.4"
       "--network-alias=radarr"
       "--network=media_media"
     ];
@@ -219,7 +189,6 @@
     ];
     log-driver = "journald";
     extraOptions = [
-      "--ip=172.21.0.3"
       "--network-alias=sonarr"
       "--network=media_media"
     ];

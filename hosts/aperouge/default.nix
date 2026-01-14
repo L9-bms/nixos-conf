@@ -2,53 +2,27 @@
 
 {
   imports = [
-    ../../modules
     ./hardware-configuration.nix
     ./disk-config.nix
+
+    ../../modules
+
+    ./networking.nix
+    ./persistence.nix
+
+    ./virtualization/libvirt.nix
+    ./virtualization/microvm.nix
+
+    ./services
   ];
 
-  profiles.server.enable = true;
-  profiles.homelab.enable = true;
+  profiles.base.enable = true;
+  boot.loader.systemd-boot.enable = true;
 
   networking.hostName = "aperouge";
   networking.hostId = "7f580963";
-  
-  boot.loader.systemd-boot.enable = true;
 
-  fileSystems."/persist".neededForBoot = true;
-
-  console.earlySetup = true;
-  systemd.services.systemd-vconsole-setup.unitConfig.After = "local-fs.target";
-  boot.initrd.systemd = {
-    enable = true;
-    services.initrd-rollback-root = {
-      after = [ "zfs-import-rpool.service" ];
-      wantedBy = [ "initrd.target" ];
-      before = [
-        "sysroot.mount"
-      ];
-      path = [ pkgs.zfs ];
-      description = "Rollback root fs";
-      unitConfig.DefaultDependencies = "no";
-      serviceConfig.Type = "oneshot";
-      script = "zfs rollback -r rpool/nixos/root@blank";
-    };
-  };
-  # https://notthebe.ee/blog/nixos-ephemeral-zfs-root/
-
-  # for vscode remote server...
   programs.nix-ld.enable = true;
-
-  networking.nat.externalInterface = "enp1s0";
-
-  systemd.network.networks."10-wan" = {
-    matchConfig.Name = "enp1s0";
-    networkConfig = {
-      DHCP = "ipv4";
-      IPv6AcceptRA = true;
-    };
-    linkConfig.RequiredForOnline = "routable";
-  };
 
   environment.systemPackages = with pkgs; [
     git
@@ -56,7 +30,14 @@
     age
     sops
     openssl
+    neovim
+    yazi
   ];
+
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    age.keyFile = "/persist/sops-nix/key.txt";
+  };
 
   services.openssh.hostKeys = [
     {
@@ -70,35 +51,13 @@
     }
   ];
 
-  environment.persistence."/persist" = {
-    enable = true;
-    hideMounts = true;
-    files = [
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key.pub"
-      "/etc/ssh/ssh_host_rsa_key"
-      "/etc/ssh/ssh_host_rsa_key.pub"
-      "/etc/machine-id"
-      "/etc/shadow"
-    ];
-    directories = [
-      "/var/lib/tailscale"
-      "/var/lib/nixos"
-      # "/var/lib/technitium-dns-server"
-      "/var/lib/grafana"
-      "/var/lib/prometheus2"
-    ];
-  };
+  # DELETE
+  security.sudo.wheelNeedsPassword = false;
+  systemd.tmpfiles.rules = [
+    "d /mnt/media 0750 root root -"
+  ];
 
-  fileSystems."/var/lib/technitium-dns-server" = {
-    device = "/persist/var/lib/technitium-dns-server";
-    options = [ "bind" ];
-  };
-
-  sops = {
-    defaultSopsFile = ../../secrets/secrets.yaml;
-    age.keyFile = "/persist/sops-nix/key.txt";
-  };
+  users.users.callum.hashedPasswordFile = "/persist/passwd/callum";
 
   system.stateVersion = "25.11";
 }
