@@ -11,4 +11,4 @@ components that are too difficult or impossible to define declaratively
   - <https://blog.foxxmd.dev/posts/redundant-lan-dns/>
 - grafana dashboards and stuff
 - libvirt vm for home assistant os
-
+- registering forgejo-runner

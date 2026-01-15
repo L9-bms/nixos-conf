@@ -82,7 +82,23 @@ in
             type = "zfs_fs";
             options.mountpoint = "none";
           };
-          "vms/arr-stack" = {
+          "vms/haos" = {
+            type = "zfs_volume";
+            size = "10G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+            };
+          };
+          "vms/dmz" = {
+            type = "zfs_volume";
+            size = "10G";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+            };
+          };
+          "vms/forgejo-runner" = {
             type = "zfs_volume";
             size = "10G";
             content = {

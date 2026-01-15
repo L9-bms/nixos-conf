@@ -51,6 +51,14 @@
     }
 
     {
+      name = "Technitium DNS";
+      host = "technitium.7sref";
+      iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/technitium.png";
+      addr = "127.0.0.1:5380";
+      category = "Administration";
+    }
+
+    {
       name = "Sonarr";
       host = "sonarr.7sref";
       iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/sonarr.png";

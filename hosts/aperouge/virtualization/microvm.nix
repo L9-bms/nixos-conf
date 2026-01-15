@@ -6,10 +6,11 @@
 
 let
   vmConfigs = [
-    ./microvms/arr-stack.nix
+    ./microvms/dmz.nix
+    ./microvms/forgejo-runner.nix
   ];
 
-  vmNames = map (vm: (import vm { inherit lib; }).networking.hostName) vmConfigs;
+  vmNames = map (vm: (import vm { inherit lib pkgs; }).networking.hostName) vmConfigs;
 in
 {
   microvm = {
@@ -18,12 +19,11 @@ in
       map (
         vmConfig:
         let
-          vm = import vmConfig { inherit lib; };
+          vm = import vmConfig { inherit lib pkgs; };
         in
         {
           name = vm.networking.hostName;
           value = {
-            inherit pkgs;
             config = vmConfig;
           };
         }
