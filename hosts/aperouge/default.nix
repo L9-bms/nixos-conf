@@ -55,6 +55,8 @@
   security.sudo.wheelNeedsPassword = false;
   systemd.tmpfiles.rules = [
     "d /mnt/media 0750 root root -"
+    "d /mnt/media/torrents 0750 root root -"
+    "d /mnt/media/media 0750 root root -"
   ];
 
   users.users.callum.hashedPasswordFile = "/persist/passwd/callum";

@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  config,
   ...
 }:
 
@@ -18,7 +17,7 @@
       extraOptions = [
         "--network-alias=flaresolverr"
         "--network=media"
-        "--ip=172.16.0.6"
+        "--ip=172.21.0.6"
       ];
     };
     "media-jellyfin" = {
@@ -34,7 +33,7 @@
       extraOptions = [
         "--network-alias=jellyfin"
         "--network=media"
-        "--ip=172.16.0.7"
+        "--ip=172.21.0.7"
       ];
     };
     "media-prowlarr" = {
@@ -45,7 +44,7 @@
         "TZ" = "Sydney/Australia";
       };
       volumes = [
-        "/persist/data/prowlarr:/config:rw"
+        "/persist/data/media/prowlarr:/config:rw"
       ];
       extraOptions = [
         "--ip=172.21.0.5"
@@ -139,7 +138,7 @@
           ExecStop = "podman network rm -f media";
         };
         script = ''
-          podman network inspect media || podman network create media --subnet=172.21.0.0/16
+          podman network inspect media || podman network create media --subnet=172.21.0.0/16 --disable-dns
         '';
         partOf = [ "podman-compose-media-root.target" ];
         wantedBy = [ "podman-compose-media-root.target" ];

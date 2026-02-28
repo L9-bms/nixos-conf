@@ -62,42 +62,42 @@
       name = "Sonarr";
       host = "sonarr.7sref";
       iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/sonarr.png";
-      addr = "10.0.0.1:8989";
+      addr = "172.21.0.3:8989";
       category = "Media";
     }
     {
       name = "Radarr";
       host = "radarr.7sref";
       iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/radarr.png";
-      addr = "10.0.0.1:7878";
+      addr = "172.21.0.4:7878";
       category = "Media";
     }
     {
       name = "Prowlarr";
       host = "prowlarr.7sref";
       iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/prowlarr.png";
-      addr = "10.0.0.1:9696";
+      addr = "172.21.0.5:9696";
       category = "Media";
     }
     {
       name = "qBittorrent";
       host = "qbittorrent.7sref";
       iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/qbittorrent.png";
-      addr = "10.0.0.1:11090";
+      addr = "172.21.0.2:11090";
       category = "Media";
     }
-    # {
-    #   name = "Jellyfin";
-    #   host = "jellyfin.7sref";
-    #   iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/jellyfin.png";
-    #   addr = "10.0.0.1:8096";
-    #   category = "Media";
-    # }
+    {
+      name = "Jellyfin";
+      host = "jellyfin.7sref";
+      iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/jellyfin.png";
+      addr = "172.21.0.7:8096";
+      category = "Media";
+    }
     {
       name = "FlareSolverr";
       host = "flaresolverr.7sref";
       iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/flaresolverr.png";
-      addr = "10.0.0.1:8191";
+      addr = "172.21.0.6:8191";
       category = "Media";
     }
   ];

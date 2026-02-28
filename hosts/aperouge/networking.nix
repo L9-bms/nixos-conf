@@ -27,6 +27,12 @@ in
 
   networking.useNetworkd = true;
 
+  services.resolved = {
+    extraConfig = ''
+      DNSStubListener=no
+    '';
+  };
+
   systemd.network = {
     enable = true;
 
