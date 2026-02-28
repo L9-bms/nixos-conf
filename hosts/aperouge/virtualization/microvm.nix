@@ -7,7 +7,6 @@
 let
   vmConfigs = [
     ./microvms/dmz.nix
-    ./microvms/forgejo-runner.nix
   ];
 
   vmNames = map (vm: (import vm { inherit lib pkgs; }).networking.hostName) vmConfigs;

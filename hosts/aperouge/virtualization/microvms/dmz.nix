@@ -19,7 +19,7 @@
 
   microvm.volumes = [
     {
-      image = "/dev/zvol/rpool/vms/dmz";
+      image = "/persist/data/vm/dmz";
       mountPoint = "/";
       size = 10240;
     }

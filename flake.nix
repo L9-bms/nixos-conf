@@ -21,23 +21,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    disko-zfs = {
-      url = "github:numtide/disko-zfs";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.disko.follows = "disko";
-    };
-
     impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs =
     {
-      self,
       nixpkgs,
       sops-nix,
       microvm,
       disko,
-      disko-zfs,
       impermanence,
       ...
     }@inputs:
@@ -50,7 +42,6 @@
             sops-nix.nixosModules.sops
             microvm.nixosModules.host
             disko.nixosModules.disko
-            disko-zfs.nixosModules.default
             impermanence.nixosModules.impermanence
           ];
         };
