@@ -2,6 +2,7 @@ let
   diskMain = "virtio-67";
 in
 {
+  disko.zfs = { enable = true; };
   disko.devices = {
     disk = {
       main = {
