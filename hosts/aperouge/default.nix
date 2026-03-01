@@ -10,8 +10,6 @@
     ./networking.nix
     ./persistence.nix
 
-    ./virtualization/microvm.nix
-
     ./services
   ];
 
