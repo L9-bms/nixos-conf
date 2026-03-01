@@ -25,6 +25,15 @@
     }
   ];
 
+  microvm.shares = [
+    {
+      source = "/persist/data/dmz";
+      mountPoint = "/persist";
+      tag = "data";
+      proto = "virtiofs";
+    }
+  ];
+
   # Enable container name DNS for all Podman networks.
   networking.firewall.interfaces =
     let
@@ -61,9 +70,9 @@
       };
       dependsOn = [ "mediawiki-db" ];
       volumes = [
-        "/persist/data/mediawiki/images:/var/www/html/images"
-        "/persist/data/mediawiki/assets:/var/www/html/assets"
-        "/persist/data/mediawiki/LocalSettings.php:/var/www/html/LocalSettings.php"
+        "/persist/mediawiki/images:/var/www/html/images"
+        "/persist/mediawiki/assets:/var/www/html/assets"
+        "/persist/mediawiki/LocalSettings.php:/var/www/html/LocalSettings.php"
       ];
     };
     mediawiki-db = {
@@ -74,6 +83,9 @@
         MYSQL_USER = "mediawiki";
         MYSQL_PASSWORD = "hKYo7nweCgET7u";
       };
+      volumes = [
+        "/persist/mediawiki/db:/var/lib/mysql"
+      ];
     };
   };
 
