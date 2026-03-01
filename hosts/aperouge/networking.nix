@@ -1,8 +1,7 @@
-{ config, lib, ... }:
+{ config, ... }:
 
 let
   netInterface = "enp1s0";
-  maxMicroVMs = 8;
 in
 {
   networking.nftables.enable = true;
@@ -19,7 +18,7 @@ in
   };
 
   systemd.services.tailscaled.serviceConfig.Environment = [
-    "TS_DEBUG_FIREWALL_MODE=nftables"
+    "TS_DEBUG_FIREWALL_MODE=nftables" # tailscale
   ];
 
   systemd.network.wait-online.enable = false;
@@ -63,42 +62,6 @@ in
         # ];
         linkConfig.RequiredForOnline = "routable";
       };
-    }
-    // builtins.listToAttrs (
-      # from https://microvm-nix.github.io/microvm.nix/routed-network.html
-      map (index: {
-        name = "30-vm${toString index}";
-        value = {
-          matchConfig.Name = "vm${toString index}";
-          address = [
-            "10.0.0.0/32"
-            "fec0::/128"
-          ];
-          routes = [
-            { Destination = "10.0.0.${toString index}/32"; }
-            { Destination = "fec0::${lib.toHexString index}/128"; }
-          ];
-          networkConfig = {
-            IPv4Forwarding = true;
-            IPv6Forwarding = true;
-          };
-        };
-      }) (lib.genList (i: i + 1) maxMicroVMs)
-    );
-  };
-
-  networking.nat = {
-    enable = true;
-    externalInterface = "br0";
-    internalIPs = [ "10.0.0.0/24" ];
-  };
-
-  # Enable container name DNS for all Podman networks.
-  networking.firewall.interfaces =
-    let
-      matchAll = if !config.networking.nftables.enable then "podman+" else "podman*";
-    in
-    {
-      "${matchAll}".allowedUDPPorts = [ 53 ];
     };
+  };
 }

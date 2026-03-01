@@ -11,11 +11,6 @@
 
     prism-tower.url = "github:L9-bms/prism-tower";
 
-    microvm = {
-      url = "github:microvm-nix/microvm.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,7 +23,6 @@
     {
       nixpkgs,
       sops-nix,
-      microvm,
       disko,
       impermanence,
       ...
@@ -40,7 +34,6 @@
           modules = [
             ./hosts/aperouge
             sops-nix.nixosModules.sops
-            microvm.nixosModules.host
             disko.nixosModules.disko
             impermanence.nixosModules.impermanence
           ];
