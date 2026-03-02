@@ -15,7 +15,6 @@
         "TZ" = "Australia/Sydney";
       };
       extraOptions = [
-        "--network-alias=flaresolverr"
         "--network=media"
         "--ip=172.21.0.6"
       ];
@@ -31,7 +30,6 @@
         "/persist/data/media/jellyfin/config:/config:rw"
       ];
       extraOptions = [
-        "--network-alias=jellyfin"
         "--network=media"
         "--ip=172.21.0.7"
       ];
@@ -48,7 +46,6 @@
       ];
       extraOptions = [
         "--ip=172.21.0.5"
-        "--network-alias=prowlarr"
         "--network=media"
       ];
     };
@@ -66,7 +63,6 @@
       ];
       extraOptions = [
         "--ip=172.21.0.2"
-        "--network-alias=qbittorrent"
         "--network=media"
       ];
     };
@@ -83,7 +79,6 @@
       ];
       extraOptions = [
         "--ip=172.21.0.4"
-        "--network-alias=radarr"
         "--network=media"
       ];
     };
@@ -100,7 +95,6 @@
       ];
       extraOptions = [
         "--ip=172.21.0.3"
-        "--network-alias=sonarr"
         "--network=media"
       ];
     };

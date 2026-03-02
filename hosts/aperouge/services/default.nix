@@ -106,5 +106,18 @@
       addr = "172.21.0.6:8191";
       category = "Media";
     }
+    {
+      name = "OpenWebUI";
+      host = "openwebui.7sref";
+      iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/open-webui.png";
+      addr = "172.22.0.2:8080";
+      category = "AI";
+    }
+    {
+      name = "SearXNG";
+      host = "searx.7sref";
+      iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/searxng.png";
+      addr = "172.22.0.3:8080";
+    }
   ];
 }

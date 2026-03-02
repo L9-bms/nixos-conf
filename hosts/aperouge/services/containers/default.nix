@@ -3,19 +3,14 @@
 {
   imports = [
     ./media.nix
+    ./ai.nix
   ];
 
   virtualisation.podman = {
     enable = true;
     autoPrune.enable = true;
     dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = false;
   };
 
   virtualisation.oci-containers.backend = "podman";
-  virtualisation.oci-containers.containers = {
-    forgejo = {
-      image = "codeberg.org/forgejo/forgejo:11.0.9";
-    };
-  };
 }
