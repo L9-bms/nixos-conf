@@ -5,7 +5,8 @@
     ./hardware-configuration.nix
     ./disk-config.nix
 
-    ../../modules
+    ../../modules/base.nix
+    ../../modules/users.nix
 
     ./networking.nix
     ./persistence.nix
@@ -13,13 +14,13 @@
     ./services
   ];
 
-  profiles.base.enable = true;
+  modules.base.enable = true;
+  modules.users.enable = true;
+
   boot.loader.systemd-boot.enable = true;
 
   networking.hostName = "aperouge";
   networking.hostId = "7f580963";
-
-  programs.nix-ld.enable = true;
 
   environment.systemPackages = with pkgs; [
     git
@@ -36,27 +37,16 @@
     age.keyFile = "/persist/sops-nix/key.txt";
   };
 
-  services.openssh.hostKeys = [
-    {
-      path = "/etc/ssh/ssh_host_ed25519_key";
-      type = "ed25519";
-    }
-    {
-      path = "/etc/ssh/ssh_host_rsa_key";
-      type = "rsa";
-      bits = "4096";
-    }
-  ];
+  users.users.callum.hashedPasswordFile = "/persist/passwd/callum";
 
   # DELETE
+  programs.nix-ld.enable = true;
   security.sudo.wheelNeedsPassword = false;
   systemd.tmpfiles.rules = [
     "d /mnt/media 0750 root root -"
     "d /mnt/media/torrents 0750 root root -"
     "d /mnt/media/media 0750 root root -"
   ];
-
-  users.users.callum.hashedPasswordFile = "/persist/passwd/callum";
 
   system.stateVersion = "25.11";
 }

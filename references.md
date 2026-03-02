@@ -1,0 +1,1 @@
+- https://notthebe.ee/blog/nixos-ephemeral-zfs-root/

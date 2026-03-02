@@ -1,12 +1,12 @@
 let
-  diskMain = "virtio-67";
+  diskId = "ata-SAMSUNG_MZNLN256HMHQ-000H1_S2Y2NX0HB64952";
 in
 {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        device = "/dev/disk/by-id/${diskMain}";
+        device = "/dev/disk/by-id/${diskId}";
         content = {
           type = "gpt";
           partitions = {

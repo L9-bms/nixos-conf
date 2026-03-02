@@ -6,11 +6,11 @@
 }:
 
 let
-  cfg = config.modules.common;
+  cfg = config.modules.base;
   flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
 in
 {
-  options.modules.common.enable = lib.mkEnableOption "Common config for all bare metal machines";
+  options.modules.base.enable = lib.mkEnableOption "Common config";
 
   config = lib.mkIf cfg.enable {
     nixpkgs.config.allowUnfree = true;

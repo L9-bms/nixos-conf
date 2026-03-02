@@ -32,7 +32,7 @@
         aperouge = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/aperouge
+            ./hosts/aperouge/configuration.nix
             sops-nix.nixosModules.sops
             disko.nixosModules.disko
             impermanence.nixosModules.impermanence
