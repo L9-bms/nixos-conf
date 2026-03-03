@@ -28,8 +28,8 @@
     fsType = "ext4";
   };
 
-  networking.hostName = "aperouge";
-  networking.hostId = "7f580963";
+  networking.hostName = "liz";
+  networking.hostId = "19550836";
 
   environment.systemPackages = with pkgs; [
     git

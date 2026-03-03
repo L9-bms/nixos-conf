@@ -55,11 +55,11 @@
     in
     {
       nixosConfigurations = {
-        aperouge = nixpkgs.lib.nixosSystem {
+        liz = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
-            ./hosts/aperouge/configuration.nix
+            ./hosts/liz/configuration.nix
             sops-nix.nixosModules.sops
             disko.nixosModules.disko
             impermanence.nixosModules.impermanence

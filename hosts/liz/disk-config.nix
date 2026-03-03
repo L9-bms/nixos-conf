@@ -1,5 +1,5 @@
 let
-  diskId = "ata-SAMSUNG_MZNLN256HMHQ-000H1_S2Y2NX0HB64952";
+  diskId = "nvme-Patriot_M.2_P300_128GB_P300ADBB22111800174";
 in
 {
   disko.devices = {
