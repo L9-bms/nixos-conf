@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  netInterface = "enp1s0";
+  netInterface = "eno1";
 in
 {
   imports = [

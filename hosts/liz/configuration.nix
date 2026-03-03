@@ -48,6 +48,11 @@
   };
 
   users.users.callum.hashedPasswordFile = "/persist/passwd/callum";
+  users.users.callum.initialPassword = "password";
+
+  users.users.colin = {
+    isNormalUser = true;
+  };
 
   system.stateVersion = "25.11";
 }
