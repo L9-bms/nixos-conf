@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 let
   netInterface = "enp1s0";
 in
@@ -7,10 +9,12 @@ in
   ];
 
   modules.tailscale.enable = true;
+  services.tailscale.useRoutingFeatures = "server";
 
   networking.nftables.enable = true;
   networking.firewall = {
     enable = true;
+    allowPing = true;
     allowedTCPPorts = [
       22
       53
@@ -21,6 +25,16 @@ in
 
   systemd.network.wait-online.enable = false;
   boot.initrd.systemd.network.wait-online.enable = false;
+
+  services.networkd-dispatcher = {
+    enable = true;
+    rules."50-tailscale-optimizations" = {
+      onState = [ "routable" ];
+      script = ''
+        ${pkgs.ethtool}/bin/ethtool -K ${netInterface} rx-udp-gro-forwarding on rx-gro-list off
+      '';
+    };
+  };
 
   networking.useNetworkd = true;
 

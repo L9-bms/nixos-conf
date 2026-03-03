@@ -4,6 +4,7 @@
   imports = [
     ./gateway.nix
     ./monitoring.nix
+    ./samba.nix
     ./containers
   ];
 

@@ -18,6 +18,15 @@
   modules.users.enable = true;
 
   boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.extraPools = [ "tank" ];
+
+  fileSystems."/mnt/media" = {
+    device = "/dev/disk/by-uuid/0b878ab4-2310-4b8e-92e8-7ef5f47f75f8";
+    fsType = "ext4";
+  };
 
   networking.hostName = "aperouge";
   networking.hostId = "7f580963";
@@ -30,6 +39,7 @@
     openssl
     neovim
     yazi
+    ethtool
   ];
 
   sops = {
@@ -38,15 +48,6 @@
   };
 
   users.users.callum.hashedPasswordFile = "/persist/passwd/callum";
-
-  # DELETE
-  programs.nix-ld.enable = true;
-  security.sudo.wheelNeedsPassword = false;
-  systemd.tmpfiles.rules = [
-    "d /mnt/media 0750 root root -"
-    "d /mnt/media/torrents 0750 root root -"
-    "d /mnt/media/media 0750 root root -"
-  ];
 
   system.stateVersion = "25.11";
 }
