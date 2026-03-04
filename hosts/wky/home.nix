@@ -78,6 +78,8 @@
     enableFishIntegration = true;
   };
 
+  programs.fish.enable = true;
+
   xdg.configFile."nvim" = {
     source = ./nvim;
     recursive = true;
