@@ -18,19 +18,37 @@
     exporters = {
       node = {
         enable = true;
-        enabledCollectors = [ "systemd" ];
+        enabledCollectors = [
+          "logind"
+          "processes"
+          "systemd"
+          "tcpstat"
+        ];
         port = 9002;
       };
+      smartctl = {
+        enable = true;
+        port = 9003;
+      };
+      zfs = {
+        enable = true;
+        port = 9004;
+      };
     };
-    scrapeConfigs = [
-      {
-        job_name = "local_node";
-        static_configs = [
-          {
-            targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ];
-          }
+    scrapeConfigs =
+      map
+        (exporter: {
+          job_name = "local_${exporter}";
+          static_configs = [
+            {
+              targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.${exporter}.port}" ];
+            }
+          ];
+        })
+        [
+          "node"
+          "smartctl"
+          "zfs"
         ];
-      }
-    ];
   };
 }
