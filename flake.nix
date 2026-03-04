@@ -33,16 +33,20 @@
     };
 
     impermanence.url = "github:nix-community/impermanence";
+
+    deploy-rs.url = "github:serokell/deploy-rs";
   };
 
   outputs =
     {
+      self,
       nixpkgs,
       nixpkgs-unstable,
       home-manager,
       sops-nix,
       disko,
       impermanence,
+      deploy-rs,
       ...
     }@inputs:
     let
@@ -93,5 +97,17 @@
           specialArgs = { inherit inputs; };
         };
       };
+
+      deploy.nodes.liz = {
+        hostname = "liz";
+        profiles.system = {
+          sshUser = "callum";
+          user = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.liz;
+        };
+      };
+
+      # This is highly advised, and will prevent many possible mistakes
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }

@@ -48,7 +48,8 @@
   };
 
   users.users.callum.hashedPasswordFile = "/persist/passwd/callum";
-  users.users.callum.initialPassword = "password";
+
+  nix.settings.trusted-users = [ "callum" ];
 
   users.users.colin = {
     isNormalUser = true;
