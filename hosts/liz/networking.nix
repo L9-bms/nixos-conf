@@ -50,14 +50,10 @@ in
     networks = {
       "10-eno1" = {
         matchConfig.Name = netInterface;
-        networkConfig = {
-          DHCP = "ipv4";
-          IPv6AcceptRA = true;
-        };
-        # address = [ "192.168.0.2/24" ];
-        # routes = [
-        #   { Gateway = "192.168.0.1"; }
-        # ];
+        address = [ "192.168.0.2/24" ];
+        routes = [
+          { Gateway = "192.168.0.1"; }
+        ];
         linkConfig.RequiredForOnline = "routable";
       };
     };
