@@ -28,6 +28,7 @@
         "RAG_WEB_SEARCH_RESULT_COUNT" = "3";
         "RAG_WEB_SEARCH_CONCURRENT_REQUESTS" = "10";
         "SEARXNG_QUERY_URL" = "http://172.22.0.3:8080/search?q=<query>";
+        "WEBUI_AUTH" = "False";
       };
       volumes = [
         "/persist/data/open-webui:/app/backend/data"
