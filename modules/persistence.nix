@@ -56,6 +56,7 @@ in
 
       directories = lib.flatten [
         "/var/lib/nixos" # persist uids/gids
+        "/var/lib/samba" # passwords
         "/var/log"
         (lib.optional config.services.tailscale.enable "/var/lib/tailscale")
         cfg.directories
