@@ -56,7 +56,7 @@
     # we are unable to install CA for all of our devices unfortunately
     virtualHosts = builtins.listToAttrs (
       map (service: {
-        name = service.host;
+        name = "http://${service.host}, https://${service.host}";
         value = {
           extraConfig = ''
             tls {
