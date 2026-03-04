@@ -21,12 +21,13 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [
-    "zswap.enabled=1"
-    "zswap.compressor=lz4"
-    "zswap.max_pool_percent=20"
-    "zswap.shrinker_enabled=1"
-  ];
+  boot.kernelParams = [ ];
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+  };
 
   swapDevices = [ ];
 
