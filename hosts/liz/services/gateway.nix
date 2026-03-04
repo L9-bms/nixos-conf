@@ -51,7 +51,9 @@
         }
       }
       skip_install_trust
+      auto_https disable_redirects
     '';
+    # we are unable to install CA for all of our devices unfortunately
     virtualHosts = builtins.listToAttrs (
       map (service: {
         name = service.host;
