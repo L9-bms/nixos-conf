@@ -34,6 +34,11 @@
             default = "Other";
             description = "Dashboard category";
           };
+          hidden = lib.mkOption {
+            type = lib.types.bool;
+            default = false;
+            description = "Hide from dashboard";
+          };
         };
       }
     );
@@ -55,6 +60,14 @@
       iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/prometheus.png";
       addr = "${toString config.services.prometheus.listenAddress}:${toString config.services.prometheus.port}";
       category = "Monitoring";
+    }
+
+    {
+      name = "OpenWebUI";
+      host = "openwebui.7sref";
+      iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/open-webui.png";
+      addr = "172.22.0.2:8080";
+      category = "AI";
     }
 
     {
@@ -106,19 +119,15 @@
       iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/flaresolverr.png";
       addr = "172.21.0.6:8191";
       category = "Media";
+      hidden = true;
     }
-    {
-      name = "OpenWebUI";
-      host = "openwebui.7sref";
-      iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/open-webui.png";
-      addr = "172.22.0.2:8080";
-      category = "AI";
-    }
+
     {
       name = "SearXNG";
       host = "searx.7sref";
       iconUrl = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/searxng.png";
       addr = "172.22.0.3:8080";
+      hidden = true;
     }
   ];
 }

@@ -78,7 +78,7 @@
       url = "https://${service.host}";
       iconUrl = service.iconUrl;
       category = service.category;
-    }) config.localServices;
+    }) (builtins.filter (service: !service.hidden) config.localServices);
   };
 }
 
