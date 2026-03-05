@@ -1,1 +1,2 @@
 - https://notthebe.ee/blog/nixos-ephemeral-zfs-root/
+- https://github.com/n6v26r/.dotfiles/blob/main/firefox.md
