@@ -23,6 +23,9 @@
 
   networking.hostName = "wky";
   networking.networkmanager.enable = true;
+  #networking.networkmanager.dns = "systemd-resolved";
+  services.resolved.enable = true;
+
   services.tailscale.enable = true;
 
   programs.nix-ld.enable = true;
