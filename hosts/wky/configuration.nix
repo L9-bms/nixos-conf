@@ -169,9 +169,34 @@
     '';
   };
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.lilex
-  ];
+  fonts = {
+    fontDir.enable = true;
+    enableDefaultPackages = true;
+    enableGhostscriptFonts = true;
+    packages = with pkgs; [
+      cantarell-fonts
+      hack-font
+      inter
+      jetbrains-mono
+      liberation_ttf
+      monaspace
+      noto-fonts
+      ubuntu-classic
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+      nerd-fonts.droid-sans-mono
+      nerd-fonts.lilex
+      nerd-fonts.comic-shanns-mono
+    ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        monospace = [ "ComicShannsMono Nerd Font" ];
+        sansSerif = [ "ComicShannsMono Nerd Font" ];
+        serif = [ "ComicShannsMono Nerd Font" ];
+      };
+    };
+  };
 
   hardware.facetimehd.enable = true;
 
