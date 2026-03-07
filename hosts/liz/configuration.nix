@@ -44,7 +44,7 @@
 
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
-    age.keyFile = "/persist/sops-nix/key.txt";
+    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   };
 
   users.users.callum.hashedPasswordFile = "/persist/passwd/callum";

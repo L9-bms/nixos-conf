@@ -1,3 +1,10 @@
+keys:
+  - &callum_acid age1yfhmmmchummwg582vskf6f4wzy3uwrlygtjgr93qu0r4yrkdqvhsvxg3yh
+  - &liz age1aqvlxlkfanyg9m7d0u50pvhhxldxg9kjmlkyxaxaev2agd30xafq966mc4
+
 creation_rules:
   - path_regex: secrets/.*\.yaml
-    age: age1mpxrt9xprz8qa78kw3t3ha2cr2lgr8gfaen3gk7k4a6nppsgeq8q3resuk
+    key_groups:
+    - age:
+      - *callum_acid
+      - *liz
