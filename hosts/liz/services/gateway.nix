@@ -81,8 +81,3 @@
     }) (builtins.filter (service: !service.hidden) config.localServices);
   };
 }
-
-# many thanks:
-# https://waitwhat.sh/blog/custom_ca_caddy/
-# https://m0x2a.dreamymatrix.com/caddy-as-internal-ca-and-reverse-proxy/
-# https://zackmyers.io/blog/deploy-astro-on-nixos/

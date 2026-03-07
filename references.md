@@ -1,2 +1,5 @@
 - https://notthebe.ee/blog/nixos-ephemeral-zfs-root/
 - https://github.com/n6v26r/.dotfiles/blob/main/firefox.md
+- https://waitwhat.sh/blog/custom_ca_caddy/
+- https://m0x2a.dreamymatrix.com/caddy-as-internal-ca-and-reverse-proxy/
+- https://zackmyers.io/blog/deploy-astro-on-nixos/
