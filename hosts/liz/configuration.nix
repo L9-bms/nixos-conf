@@ -44,7 +44,7 @@
 
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
   };
 
   sops.secrets."passwords/callum" = {
@@ -56,6 +56,19 @@
   users.users.callum.hashedPasswordFile = config.sops.secrets."passwords/callum".path;
 
   nix.settings.trusted-users = [ "callum" ];
+
+  security.sudo.extraConfig = ''
+    Defaults lecture = always
+    Defaults lecture_file = ${pkgs.writeText "sudo-lecture" ''
+      A friendly reminder:
+
+      This system is managed by NixOS. Direct modifications
+      to the system will be lost. The root filesystem is
+      ephemeral and wiped on every boot.
+
+      Make changes to /persist/nixos-conf instead.
+    ''}
+  '';
 
   users.users.colin = {
     isNormalUser = true;
