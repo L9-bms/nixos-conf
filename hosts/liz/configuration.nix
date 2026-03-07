@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   imports = [
@@ -47,7 +47,13 @@
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
   };
 
-  users.users.callum.hashedPasswordFile = "/persist/passwd/callum";
+  sops.secrets."passwords/callum" = {
+    owner = "root";
+    group = "root";
+    mode = "0400";
+    neededForUsers = true;
+  };
+  users.users.callum.hashedPasswordFile = config.sops.secrets."passwords/callum".path;
 
   nix.settings.trusted-users = [ "callum" ];
 
