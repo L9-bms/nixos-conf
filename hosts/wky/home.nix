@@ -59,7 +59,7 @@
         term = "xterm-256color";
         font = "ComicShannsMono Nerd Font:size=11";
         pad = "4x4";
-        };
+      };
 
       scrollback.lines = "16384";
       csd.preferred = "none";
@@ -81,6 +81,16 @@
   };
 
   programs.fish.enable = true;
+
+  programs.mise = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 
   xdg.configFile."nvim" = {
     source = ./nvim;

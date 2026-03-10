@@ -138,6 +138,8 @@
         collection-fontsrecommended
       ]
     ))
+    zellij
+    wl-clipboard
   ];
 
   programs.firefox = {
