@@ -35,6 +35,8 @@
     impermanence.url = "github:nix-community/impermanence";
 
     deploy-rs.url = "github:serokell/deploy-rs";
+
+    yazi.url = "github:sxyazi/yazi";
   };
 
   outputs =
@@ -47,6 +49,7 @@
       disko,
       impermanence,
       deploy-rs,
+      yazi,
       ...
     }@inputs:
     let

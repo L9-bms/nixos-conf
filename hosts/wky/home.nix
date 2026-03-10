@@ -43,26 +43,26 @@
     };
   };
 
-  programs.alacritty = {
+  programs.yazi = {
     enable = true;
+    enableFishIntegration = true;
+    shellWrapperName = "y";
+  };
+
+  programs.foot = {
+    enable = true;
+    server.enable = true;
+
     settings = {
-      general = {
-        import = [ "~/.config/alacritty/dank-theme.toml" ];
-      };
-      font = {
-        size = 11;
-        normal = {
-          family = "Lilex Nerd Font";
-          style = "Regular";
+      main = {
+        include = "${config.home.homeDirectory}/.config/foot/dank-colors.ini";
+        term = "xterm-256color";
+        font = "ComicShannsMono Nerd Font:size=11";
+        pad = "4x4";
         };
-      };
-      window = {
-        padding = {
-          x = 4;
-          y = 4;
-        };
-        decorations = "None";
-      };
+
+      scrollback.lines = "16384";
+      csd.preferred = "none";
     };
   };
 

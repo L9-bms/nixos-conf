@@ -56,7 +56,11 @@
 
   hardware.bluetooth.enable = true;
 
-  nixpkgs.overlays = [ inputs.niri.overlays.niri ];
+  nixpkgs.overlays = [
+    inputs.niri.overlays.niri
+    inputs.yazi.overlays.default
+  ];
+
   programs.niri = {
     package = pkgs.niri-unstable;
     enable = true;
@@ -99,14 +103,12 @@
     vim
     wget
     git
-    alacritty
-    mise
+    foot
     adwaita-icon-theme
     nmap
     qalculate-gtk
     vesktop
     obsidian
-    yazi
     nautilus
     scrcpy
     android-tools
