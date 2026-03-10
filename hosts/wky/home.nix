@@ -92,9 +92,8 @@
     enableFishIntegration = true;
   };
 
-  xdg.configFile."nvim" = {
-    source = ./nvim;
-    recursive = true;
+  home.file.".config/nvim" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-conf/hosts/wky/configs/nvim";
   };
 
   home.packages = with pkgs; [

@@ -1,5 +1,4 @@
 local opt = vim.opt
-opt.colorcolumn = "80";
 opt.ignorecase = true
 opt.swapfile = false
 opt.autoindent = true
