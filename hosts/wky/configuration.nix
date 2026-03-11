@@ -177,6 +177,7 @@
     ))
     zellij
     wl-clipboard
+    lua-language-server
   ];
 
   programs.firefox = {
