@@ -182,6 +182,7 @@
     lua-language-server
     ncdu
     foliate
+    markdown-oxide
   ];
 
   programs.firefox = {

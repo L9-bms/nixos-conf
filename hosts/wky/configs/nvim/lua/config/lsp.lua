@@ -1,6 +1,7 @@
 vim.lsp.enable({
   "nixd",
-  "lua_ls"
+  "lua_ls",
+  "markdown_oxide"
 })
 
 vim.lsp.config("lua_ls", {
