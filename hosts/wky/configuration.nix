@@ -178,6 +178,8 @@
     zellij
     wl-clipboard
     lua-language-server
+    ncdu
+    foliate
   ];
 
   programs.firefox = {
