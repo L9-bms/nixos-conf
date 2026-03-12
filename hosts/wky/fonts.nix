@@ -1,8 +1,9 @@
 { pkgs, ... }:
 
 let
-  comic-mono-nf = pkgs.callPackage ../../packages/comic-mono-nf.nix { };
-  ioskeley-mono = pkgs.callPackage ../../packages/ioskeley-mono.nix { };
+  comic-mono-nf = pkgs.callPackage ../../packages/fonts/comic-mono-nf { };
+  ioskeley-mono = pkgs.callPackage ../../packages/fonts/ioskeley-mono { };
+  bitmap-fonts = pkgs.callPackage ../../packages/fonts/personal-bitmap-fonts { };
 in
 {
   fonts = {
@@ -25,6 +26,7 @@ in
 
       # bitmap fonts
       terminus_font
+      bitmap-fonts
     ];
     fontconfig = {
       enable = true;
