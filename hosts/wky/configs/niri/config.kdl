@@ -21,7 +21,14 @@ input {
 }
 
 layout {
-    gaps 1
+    gaps 0
+
+    struts {
+      left 1
+      right 1
+      top 1
+      bottom 1
+    }
 
     center-focused-column "never"
 

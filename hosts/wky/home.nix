@@ -35,6 +35,28 @@
     enable = true;
     enableFishIntegration = true;
     shellWrapperName = "y";
+
+    # disable nerd fonts
+    theme = {
+      status = {
+        sep_left = {
+          open = "";
+          close = "";
+        };
+        sep_right = {
+          open = "";
+          close = "";
+        };
+      };
+
+      icon = {
+        globs = [ ];
+        dirs = [ ];
+        files = [ ];
+        exts = [ ];
+        conds = [ ];
+      };
+    };
   };
 
   programs.foot = {
@@ -44,7 +66,7 @@
     settings = {
       main = {
         term = "xterm-256color";
-        font = "Terminus:size=10";
+        font = "BmPlus AST PremiumExec:size=16";
         pad = "4x4";
       };
 
