@@ -211,11 +211,20 @@
 
   hardware.facetimehd.enable = true;
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nix.settings.download-buffer-size = 524288000;
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+
+    trusted-users = [ "callum" ];
+
+    extra-substituters = [ "https://yazi.cachix.org" ];
+    extra-trusted-public-keys = [ "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k=" ];
+
+    download-buffer-size = 524288000;
+  };
+
   nix.buildMachines = [
     {
       hostName = "acid";
