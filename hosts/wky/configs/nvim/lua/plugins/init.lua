@@ -34,5 +34,17 @@ return {
     lazy = false,
     dependencies = { "saghen/blink.cmp" }
   },
-  { "kylechui/nvim-surround", event = "VeryLazy" }
+  { "kylechui/nvim-surround", event = "VeryLazy" },
+  {
+    'chomosuke/typst-preview.nvim',
+    lazy = false,
+    version = '1.*',
+    opts = {
+      invert_colors = '{"rest": "auto","image": "never"}',
+      dependencies_bin = {
+        ['tinymist'] = '/run/current-system/sw/bin/tinymist',
+        ['websocat'] = '/run/current-system/sw/bin/websocat'
+      }
+    },
+  }
 }

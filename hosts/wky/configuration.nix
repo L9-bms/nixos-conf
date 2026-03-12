@@ -177,6 +177,9 @@
     ncdu
     foliate
     markdown-oxide
+    zathura
+    tinymist
+    websocat
   ];
 
   programs.firefox = {

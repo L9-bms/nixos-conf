@@ -1,7 +1,8 @@
 vim.lsp.enable({
   "nixd",
   "lua_ls",
-  "markdown_oxide"
+  "markdown_oxide",
+  "tinymist"
 })
 
 vim.lsp.config("lua_ls", {
@@ -11,6 +12,18 @@ vim.lsp.config("lua_ls", {
         globals = { "vim" }
       }
     }
+  }
+})
+
+vim.lsp.config("tinymist", {
+  cmd = { "tinymist" },
+  settings = {
+    lint = {
+      enabled = "true",
+      when = "onSave"
+    },
+    formatterMode = "typstyle",
+    exportPdf = "onSave",
   }
 })
 
