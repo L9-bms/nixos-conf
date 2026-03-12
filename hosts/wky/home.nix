@@ -43,9 +43,8 @@
 
     settings = {
       main = {
-        include = "${config.home.homeDirectory}/.config/foot/dank-colors.ini";
         term = "xterm-256color";
-        font = "ComicMonoNF:size=11";
+        font = "Terminus:size=10";
         pad = "4x4";
       };
 
