@@ -60,6 +60,11 @@
         exts = [ ];
         conds = [ ];
       };
+
+      indicator.padding = {
+        open = "";
+        close = "";
+      };
     };
   };
 
