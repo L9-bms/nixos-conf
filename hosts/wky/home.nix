@@ -15,6 +15,10 @@
   programs.git.enable = true;
   home.stateVersion = "25.11";
 
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
   programs.noctalia-shell = {
     enable = true;
   };
