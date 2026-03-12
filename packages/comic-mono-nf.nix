@@ -1,11 +1,15 @@
 {
-  pkgs ? import <nixpkgs> { },
+  lib,
+  stdenvNoCC,
+  fetchFromGitHub,
 }:
 
-pkgs.stdenvNoCC.mkDerivation rec {
+stdenvNoCC.mkDerivation rec {
   pname = "comic-mono-nf";
   version = "1";
-  src = pkgs.fetchFromGitHub {
+  meta.sourceProvenance = [ lib.sourceTypes.binaryBytecode ];
+
+  src = fetchFromGitHub {
     owner = "xtevenx";
     repo = "ComicMonoNF";
     rev = "master";
