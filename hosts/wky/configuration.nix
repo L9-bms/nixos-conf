@@ -7,8 +7,6 @@
 
 {
   imports = [
-    inputs.niri.nixosModules.niri
-    inputs.dms.nixosModules.greeter
     ./hardware-configuration.nix
 
     ./fonts.nix
@@ -25,7 +23,6 @@
 
   networking.hostName = "wky";
   networking.networkmanager.enable = true;
-  #networking.networkmanager.dns = "systemd-resolved";
   services.resolved.enable = true;
 
   services.tailscale.enable = true;
@@ -59,23 +56,18 @@
   hardware.bluetooth.enable = true;
   hardware.enableAllFirmware = true;
 
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowInsecurePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [ "broadcom-sta" ];
+  };
+
   nixpkgs.overlays = [
-    inputs.niri.overlays.niri
     inputs.yazi.overlays.default
   ];
 
-  programs.niri = {
-    package = pkgs.niri-unstable;
-    enable = true;
-  };
+  programs.niri.enable = true;
 
   xdg.portal.enable = true;
-
-  programs.dank-material-shell.greeter = {
-    enable = true;
-    compositor.name = "niri";
-    configHome = "/home/callum";
-  };
 
   services.printing.enable = true;
 
@@ -139,6 +131,7 @@
   services.udisks2.enable = true;
 
   environment.systemPackages = with pkgs; [
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     vim
     wget
     git

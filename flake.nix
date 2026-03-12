@@ -3,21 +3,22 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "unstable";
     };
 
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "unstable";
+      inputs.noctalia-qs.follows = "noctalia-qs";
     };
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    noctalia-qs = {
+      url = "github:noctalia-dev/noctalia-qs";
+      inputs.nixpkgs.follows = "unstable";
     };
 
     sops-nix = {
@@ -43,22 +44,16 @@
     {
       self,
       nixpkgs,
-      nixpkgs-unstable,
+      unstable,
       home-manager,
       sops-nix,
       disko,
       impermanence,
       deploy-rs,
-      yazi,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
-      nixpkgs-patched = (import nixpkgs-unstable { inherit system; }).applyPatches {
-        name = "nixpkgs-patched";
-        src = nixpkgs-unstable;
-        patches = [ ];
-      };
     in
     {
       nixosConfigurations = {
@@ -72,19 +67,7 @@
             impermanence.nixosModules.impermanence
           ];
         };
-        wky = nixpkgs-unstable.lib.nixosSystem {
-          inherit system;
-          pkgs = import nixpkgs-patched {
-            inherit system;
-            config = {
-              allowUnfree = true;
-              allowInsecurePredicate =
-                pkg:
-                builtins.elem (nixpkgs-unstable.lib.getName pkg) [
-                  "broadcom-sta"
-                ];
-            };
-          };
+        wky = unstable.lib.nixosSystem {
           modules = [
             ./hosts/wky/configuration.nix
             home-manager.nixosModules.home-manager

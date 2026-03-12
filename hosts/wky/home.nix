@@ -7,8 +7,7 @@
 
 {
   imports = [
-    inputs.dms.homeModules.dank-material-shell
-    inputs.dms.homeModules.niri
+    inputs.noctalia.homeModules.default
   ];
 
   home.username = "callum";
@@ -16,19 +15,8 @@
   programs.git.enable = true;
   home.stateVersion = "25.11";
 
-  programs.dank-material-shell = {
+  programs.noctalia-shell = {
     enable = true;
-
-    niri = {
-      enableSpawn = true;
-      includes.enable = true;
-    };
-
-    enableSystemMonitoring = true;
-    enableVPN = true;
-    enableDynamicTheming = true;
-    enableAudioWavelength = true;
-    enableCalendarEvents = true;
   };
 
   programs.delta = {
@@ -94,6 +82,10 @@
 
   home.file.".config/nvim" = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-conf/hosts/wky/configs/nvim";
+  };
+
+  home.file.".config/niri" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-conf/hosts/wky/configs/niri";
   };
 
   home.packages = with pkgs; [
