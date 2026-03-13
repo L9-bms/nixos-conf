@@ -43,7 +43,7 @@
   };
 
   powerManagement.enable = true;
-  services.power-profiles-daemon.enable = true;
+  services.tuned.enable = true;
   services.upower.enable = true;
 
   services.syncthing = {
@@ -92,8 +92,6 @@
       };
     };
   };
-
-  services.auto-cpufreq.enable = true;
 
   programs.fish.enable = true;
   documentation.man.cache.enable = false; # prevent extra long build times
