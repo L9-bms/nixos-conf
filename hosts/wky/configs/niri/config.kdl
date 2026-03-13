@@ -84,11 +84,11 @@ binds {
     Mod+S { spawn-sh "noctalia-shell ipc call controlCenter toggle"; }
     Mod+Shift+Comma { spawn-sh "noctalia-shell ipc call settings toggle"; }
 
-    XF86AudioRaiseVolume { spawn "noctalia-shell" "ipc" "call" "volume" "increase"; }
-    XF86AudioLowerVolume { spawn "noctalia-shell" "ipc" "call" "volume" "decrease"; }
-    XF86AudioMute { spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
-    XF86MonBrightnessUp { spawn "noctalia-shell" "ipc" "call" "brightness" "increase"; }
-    XF86MonBrightnessDown { spawn "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+    XF86AudioRaiseVolume  repeat=false { spawn "noctalia-shell" "ipc" "call" "volume" "increase"; }
+    XF86AudioLowerVolume  repeat=false { spawn "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+    XF86AudioMute         repeat=false { spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+    XF86MonBrightnessUp   repeat=false { spawn "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    XF86MonBrightnessDown repeat=false { spawn "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
 
     Mod+T hotkey-overlay-title="Open a Terminal" { spawn "foot"; }
     Mod+E hotkey-overlay-title="Open File Explorer" { spawn "foot" "yazi"; }
